@@ -3,7 +3,7 @@
 * React.memo prevents unnecessary re-rendering i.e re-render on unchanged props.
 * React.memo can not prevent rendering when render it is intentionally triggerd (by state change or effect)
 
-UseMemo
+React.memo
 ```js
 import React, { useEffect } from "react";
 
@@ -14,7 +14,7 @@ function MemoExample({ count }) {
   return <div>UsingMemo</div>;
 }
 
-export default MemoExample;
+export default React.memo(MemoExample);
 
 ```
 in above example Component WILL ONLY render when there is change in its props.
