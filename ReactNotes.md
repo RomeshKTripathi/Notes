@@ -130,7 +130,7 @@ When the application is running in development mode, React will automatically ch
 * PropTypes.symbol
 * PropTypes.any
 
-  ```js
+```js
 import React from "react";
 import PropTypes from "prop-types";
 
@@ -147,4 +147,4 @@ User.propTypes = {
   name: PropTypes.string.isRequired,
   age: PropTypes.number.isRequired,
 };
-  ```
+```
