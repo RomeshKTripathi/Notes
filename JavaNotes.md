@@ -303,7 +303,7 @@ list.add("Cherry");
 System.out.println("Size of the list: " + list.size());
 ```
 
-### `list.getIndex(int index)`
+### `list.get(int index)`
 ```java
 // Get element at a specific index
 System.out.println("Element at index 1: " + list.get(1));
