@@ -389,10 +389,10 @@ for (int i = 0; i < list.size(); i++) {
 
 ### Using an enhanced loop
 ```java
-// Using a for loop
-System.out.println("Iterating using a for loop:");
-for (int i = 0; i < list.size(); i++) {
-    System.out.println(list.get(i));
+// Using an enhanced for loop
+System.out.println("Iterating using an enhanced for loop:");
+for (String fruit : list) {
+    System.out.println(fruit);
 }
 ```
 
