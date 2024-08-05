@@ -169,7 +169,8 @@ return <Handler />;
 }
 ```
 
-> [!NOTE] We cant use `for` loop in jsx because , JSX tags are transpiled into _function_ calls, and you can't use statements inside expressions. This may change thanks to `do` expressions which are _stage 1 proposal_.
+> [NOTE]
+> We cant use `for` loop in jsx because , JSX tags are transpiled into _function_ calls, and you can't use statements inside expressions. This may change thanks to `do` expressions which are _stage 1 proposal_.
 
 
 
