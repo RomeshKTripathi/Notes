@@ -169,13 +169,61 @@ return <Handler />;
 }
 ```
 
-> [NOTE]
+> [!NOTE]
 > We cant use `for` loop in jsx because , JSX tags are transpiled into _function_ calls, and you can't use statements inside expressions. This may change thanks to `do` expressions which are _stage 1 proposal_.
 
+# Why we can't update props in react ?
+The react _Philosopy_ is that props should be ***Immutable***(Read Only) and _top down_. This means that a parent can send any prop values to a child, but the child can't modify received props.
 
+# Can we use ***async/await*** in plain `React`?
+If you want to use `async`/`await` in _React_, you will need _Babel_ and _transform-async-to-generator_ plugin. React Native ships with Babel and a set of transforms.
+> [!NOTE]
+> You can't use `async`/`await` directly to your _React_ component.
 
+# Folder Structure in React:
 
+## Grouping by feature of route
+```txt
+common/
+├─ Avatar.js
+├─ Avatar.css
+├─ APIUtils.js
+└─ APIUtils.test.js
+feed/
+├─ index.js
+├─ Feed.js
+├─ Feed.css
+├─ FeedStory.js
+├─ FeedStory.test.js
+└─ FeedAPI.js
+profile/
+├─ index.js
+├─ Profile.js
+├─ ProfileHeader.js
+├─ ProfileHeader.css
+└─ ProfileAPI.js
+```
 
+## Grouping By fileType
+```txt
+api/
+├─ APIUtils.js
+├─ APIUtils.test.js
+├─ ProfileAPI.js
+└─ UserAPI.js
+components/
+├─ Avatar.js
+├─ Avatar.css
+├─ Feed.js
+├─ Feed.css
+├─ FeedStory.js
+├─ FeedStory.test.js
+├─ Profile.js
+├─ ProfileHeader.js
+└─ ProfileHeader.css
+```
 
+# React Animation Popular Packages
+`React Transition` and `React Motion` are popular animation packages in react.
 
 
