@@ -279,4 +279,30 @@ components/
 # React Animation Popular Packages
 `React Transition` and `React Motion` are popular animation packages in react.
 
+# State Management
+### Flux
+_flux_ is an _application design paradigm_ used as a replacement for the traditional MVC pattern. It is not a framework or a library but a new kind of architecture that complements React and the concept of Unidirectional Data Flow. Facebook uses this pattern internally when working with React.
+The workflow between dispatcher, stores and views components with distinct inputs and outputs as follows.
+
+
+
+![flux](https://github.com/user-attachments/assets/823f7cde-a028-4ffd-9f08-7529befc4cab)
+
+
+### Redux
+_Redux_ is predictable state container for JavaScript apps based on the _Flux design Pattern_. Redus can be use together with React, or with any other view library. It is tiny (about 2kb) and has no dependencies.
+
+```
+Redux follows three fundamental principles:
+
+Single source of truth: The state of your whole application is stored in an object tree within a single store. The single state tree makes it easier to keep track of changes over time and debug or inspect the application.
+State is read-only: The only way to change the state is to emit an action, an object describing what happened. This ensures that neither the views nor the network callbacks will ever write directly to the state.
+Changes are made with pure functions: To specify how the state tree is transformed by actions, you write reducers. Reducers are just pure functions that take the previous state and an action as parameters, and return the next state.
+```
+
+
+
+
+
+
 
