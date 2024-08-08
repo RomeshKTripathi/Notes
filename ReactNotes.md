@@ -1,7 +1,7 @@
 
 # React.memo(Component)
 * React.memo prevents unnecessary re-rendering i.e re-render on unchanged props.
-* React.memo can not prevent rendering when render it is intentionally triggerd (by state change or effect)
+* React.memo can not prevent rendering when render it is intentionally/explicitly triggerd (by state change or effect)
 
 React.memo
 ```js
@@ -46,6 +46,7 @@ function App() {
 
 export default App;
 ```
+> [!NOTE]
 > It is always recommended to make our state as simple as possible and ***minimize the number of stateful components***.
 
 # What are synthetic events in React?
@@ -101,7 +102,59 @@ The Shadow DOM is a browser technology designed primarily for scoping variables 
 * Uncontrolled components uses ***ref*** to query data from input fields and input values are managed by DOM itself.
 
 # createElement() vs cloneElement()
-When react creates new element it uses createElement and whent it re-renders any element it just clones it and changes props of the data and replaces it with Actual Node.
+### `React.createElement()`
+`React.createElement()` is used to create new element in DOM but it is not recommended to use because it is hard to debug and maintain
+```js
+import React from 'react';
+import "./styles.css";
+const title = React.createElement('h1',
+    { className: 'title' }, 'GeeksforGeeks');
+const App = () =>
+    React.createElement('div', {}, [
+        React.createElement('button', { className: 'btn' }, title),
+        React.createElement('button', { className: 'btn' }, title),
+    ]);
+ 
+export default App;
+```
+In above example a div element is created using `React.createElement()`.
+### `React.cloneElement()`
+`React.cloneElement()` is can clone an existing element and can change its props.
+```js
+//App.js
+import React from 'react';
+import Button from './Button';
+import './styles.css';
+const App = () => {
+	return (
+		<Parent>
+			<Button />
+			<br /><br />
+			<Button />
+		</Parent>
+	)
+}
+
+const Parent = (props) => {
+	let btn = 'GeeksforGeeks';
+	return (
+		<div>
+			{React.Children.map(props.children,
+				child => {
+					return React.cloneElement(child,
+						{ btn }, null); 
+					// third parameter is null
+					// Because we are not adding
+					// any children
+				})}
+		</div>
+	)
+}
+
+export default App;
+```
+In above code we have modified an elements exisitng state by changing its _props_.
+
 
 # HOC in react
 Components which provides additional functionality to an existing component are called HOC 
