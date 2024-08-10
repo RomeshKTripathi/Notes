@@ -221,4 +221,185 @@ const (constant, can't be changed
 var (old style)
 ```
 
+## Polyfills and transpilers
+As a Programmer, how to make our modern code work on older engines that don’t understand recent features yet?
+
+There are two tools for that:
+1. Transpilers.
+2. Polyfills.
+
+### Transpilers
+A Transpiler is a special piece of software that translates source code to another source code.It can parse _("Read and Understand")_ modern code and rewrite it using older syntax constructs, so that it'll also work in outdated engines.
+
+```
+E.g. Javascript before year 2020 didn't have the "nullish coalescing operator" ??. So if a visitor uses an outdated browser, it may fail to understand the code like height = height ?? 100.
+
+A transpiler would analyze our code and rewrite height ? 100 into:
+(height !== undefined && height !== null ) ? height : 100
+```
+
+```js
+// before running the transpiler
+height = height ?? 100;
+
+// after running the transpiler
+height = (height !== undefined && height !== null) ? height : 100;
+```
+
+### Polyfills
+New language features may include not only syntax constructs and operators, but also built-in functions.
+For example  `Math.trunc(n)` is a function that _cutts off_ the decimal part of a number, e.b Math.trunc(1.23) returns 1.
+In some (very outdated) JavaScript Engines, there's no `Math.trunc()` so such code will fail . 
+As we're talkin about new function, not syntax changes, there's no need to transpile anything here. We just need to declare the missing function.
+A script  that updates/adds new functions is called "polyfill". It "fills in" the gap and adds missing implementations.
+For this particular case, the polyfill for `Math.trunc()` is a script that implements it, like this:
+
+```js
+if (!Math.trunc) { // if no such function
+  // implement it
+  Math.trunc = function(number) {
+    // Math.ceil and Math.floor exist even in ancient JavaScript engines
+    return number < 0 ? Math.ceil(number) : Math.floor(number);
+  };
+}
+```
+
+
+## Objects: The basics
+objects are used to store keyed collections of various data and more complex entities. In JavaScript, objects penetrate almost every aspect of the language. So we must understand them first before going in-depth anywhere else.
+
+We can imagine an object as a cabinet with signed files. Every piece of data is stored in its file by the key. It’s easy to find a file by its name or add/remove a file.
+
+An empty object (“empty cabinet”) can be created using one of two syntaxes:
+```js
+let user = new Object(); // "Object constructor" syntax
+let user = {}; // "Object literal" Syntax.
+```
+
+We can immediately put some properties into `{...}` as _"key:value"_ pairs:
+```js
+let user = {
+  name: "John",
+  age:30,
+}
+```
+
+Property values of object are accessible by `dot: . ` notattion
+```js
+alert(user.name); // John
+alert(user.age); //30
+```
+
+The value can be of any type. Let's add a boolean value
+```js
+user.isAdmin = true;
+```
+
+> [!TIP]
+> to remove a property you can use `delete` operator
+
+```js
+delete user.age;
+```
+
+> We can also multiword property names, but then they must be quoted:
+```js
+let user = {
+name:"Sachin",
+age:24,
+"likes Coding":true,
+// comma on the last propery can be avoided, it is called trailing or hanging comma
+}
+```
+> [!NOTE]
+> To access _multiword properties_ we can't use dot `.` operator
+> we have to use _Square Brackets_
+```js
+user['likes Coding'] = true;
+
+alert(user['likes Coding']);
+
+delete user['likes Coding'];
+
+let key = 'likes Coding';
+alert(user[key]);
+```
+### Computed properties
+We can use _Square brackets_ in an object literal, when creating an object. That's called _computed properties_
+
+```js
+let fruit = prompt("Which fruit to buy?", "apple");
+
+let bag = {
+  [fruit]: 5, // the name of the property is taken from the variable fruit
+};
+
+alert( bag.apple ); // 5 if fruit="apple"
+```
+
+### Property value shorthand
+we often use existing variables a values for property names.
+```js
+function makeUser(name, age) {
+  return {
+    name: name,
+    age: age,
+    // ...other properties
+  };
+}
+
+let user = makeUser("John", 30);
+alert(user.name); // John
+```
+In the example above, properties have the same names as variables. The use-case of making a property from a variable is so common, that there’s a special property value shorthand to make it shorter.
+Instead of name:name we can just write name, like this:
+
+```js
+function makeUser(name, age) {
+  return {
+    name, // same as name: name
+    age,  // same as age: age
+    // ...
+  };
+}
+```
+We can use both normal properties and shorthands in the same object:
+
+```js
+let user = {
+  name,  // same as name:name
+  age: 30
+};
+```
+
+### Property name limitations:
+As we already know, a variable cannot have a name equal to one of the language-reserved words like “for”, “let”, “return” etc.
+
+> [!NOTE]
+> But for an object property, there’s no such restriction:
+
+```js
+// these properties are all right
+let obj = {
+  for: 1,
+  let: 2,
+  return: 3
+};
+
+alert( obj.for + obj.let + obj.return );  // 6
+```
+Other types are automatically converted to strings.
+
+For instance, a number 0 becomes a string "0" when used as a property key:
+```js
+let obj = {
+  0: "test" // same as "0": "test"
+};
+
+// both alerts access the same property (the number 0 is converted to string "0")
+alert( obj["0"] ); // test
+alert( obj[0] ); // test (same property)
+```
+> [!WARNING]
+> There’s a minor gotcha with a special property named __proto__. We can’t set it to a non-object value:
 
