@@ -265,7 +265,7 @@ if (!Math.trunc) { // if no such function
 ```
 
 
-## Objects: The basics
+# Objects: The basics
 objects are used to store keyed collections of various data and more complex entities. In JavaScript, objects penetrate almost every aspect of the language. So we must understand them first before going in-depth anywhere else.
 
 We can imagine an object as a cabinet with signed files. Every piece of data is stored in its file by the key. It’s easy to find a file by its name or add/remove a file.
@@ -402,4 +402,115 @@ alert( obj[0] ); // test (same property)
 ```
 > [!WARNING]
 > There’s a minor gotcha with a special property named __proto__. We can’t set it to a non-object value:
+
+```JS
+let obj = {};
+obj.__proto__ = 5; // assign a number
+alert(obj.__proto__); // [object Object] - the value is an object, didn't work as intended
+```
+
+### Property Existence test, _`in`_ operator:
+> A notable feature of objects in JavaScript, compared to many other languages, is that it’s possible to access any property. There will be no error if the property doesn’t exist!
+
+Reading a non-existing property just returns undefined. So we can easily test whether the property exists:
+
+```js
+let user = {};
+
+alert( user.noSuchProperty === undefined ); // true means "no such property"
+```
+There’s also a special operator "in" for that.
+
+The syntax is:
+> "key" in object
+
+Example:
+
+```js
+let user = { name: "John", age: 30 };
+
+alert( "age" in user ); // true, user.age exists
+alert( "blabla" in user ); // false, user.blabla doesn't exist
+```
+Please note that on the left side of in there must be a property name. That’s usually a quoted string.
+
+If we omit quotes, that means a variable should contain the actual name to be tested. For instance:
+
+```js
+let user = { age: 30 };
+
+let key = "age";
+alert( key in user ); // true, property "age" exists
+```
+
+### The _`for..in`_ loop
+To walk over all keys of an object, there exists a special form of the loop: _for..in_. This is a completely different thing from the for(;;).
+
+```js
+
+for (key in object) {
+  // executes the body for each key among object properties
+}
+```
+Example:
+
+```js
+let user = {
+  name: "John",
+  age: 30,
+  isAdmin: true
+};
+
+for (let key in user) {
+  // keys
+  alert( key );  // name, age, isAdmin
+  // values for the keys
+  alert( user[key] ); // John, 30, true
+}
+```
+
+### Order of keys in objecs
+Are objects ordered? In other words, if we loop over an object, do we get all properties in the same order they were added? Can we rely on this?
+
+The short answer is: “ordered in a special fashion”: integer properties are sorted, others appear in creation order. The details follow.
+
+As an example, let’s consider an object with the phone codes:
+
+```js
+let codes = {
+  "49": "Germany",
+  "41": "Switzerland",
+  "44": "Great Britain",
+  // ..,
+  "1": "USA"
+};
+
+for (let code in codes) {
+  alert(code); // 1, 41, 44, 49
+}
+```
+> [!NOTE]
+> Non integer keys are listed in _creation_ order.
+
+```js
+let user = {
+  name: "John",
+  surname: "Smith"
+};
+user.age = 25; // add one more
+
+// non-integer properties are listed in the creation order
+for (let prop in user) {
+  alert( prop ); // name, surname, age
+}
+```
+
+## Object References and Copying
+> One of the fundamental differences of objects versus primitives is that objects are stored and copied “by reference”, whereas primitive values: strings, numbers, booleans, etc – are always copied “as a whole value”.
+
+
+
+
+
+
 
