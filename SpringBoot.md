@@ -3,13 +3,29 @@
 ## General Introduction
 
 ### Inversion of Control / IOC
+In our general Java Programs we used to create objects by own but in *Spring Boot* does it automatically and control of creating object goes to Spring Framework this concept is called Inversion of control. Objects can be accessed through `@Autowired` annotation in Spring.
+
+
 ### Dependency Injection
+We know that objects of the `@Component` annoted class is automatically created by Spring Boot. These objects are *Injected* in program at run time this concept is called Dependency Injection
+```java
+@Autowired
+MyClass myClass;
+```
+
+
 ### Bean
+Objects created by Spring Boot of components are called *Beans*.
+
+
 ### POJO Classes
+POJO stands for `Plain Old Java Object`.
 
 ## Terminologies
 ### Annotations
-### Beans
+annotations are used to give some information about class/field/method to Spring Boot.
+
+
 ### Mapping
 
 
