@@ -1,3 +1,14 @@
+# Core React 
+## Lifecycle Methods
+Backbone of react.js hooks and Important Methods for Class Based Components.
+### `componentDidMount()`
+when component *Loads and renders first time* this method gets invoked.
+```js
+
+
+```
+
+
 
 # React.memo(Component)
 * React.memo prevents unnecessary re-rendering i.e re-render on unchanged props.
