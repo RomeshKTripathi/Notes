@@ -4,10 +4,20 @@ Backbone of react.js hooks and Important Methods for Class Based Components.
 ### `componentDidMount()`
 when component *Loads and renders first time* this method gets invoked.
 ```js
-
+componentDidMount()
+shouldComponentUpdate()
+componentWillUnmount()
 
 ```
-
+`constructor()`: Used to initialize the component's state. 
+`getDerivedStateFromProps()`: Called before rendering to update the state based on new props. 
+`render()`: Returns the JSX that defines the component's UI. 
+`componentDidMount()`: Called after the component is mounted (rendered) into the DOM, often used for side effects like making API calls or setting up subscriptions. 
+`shouldComponentUpdate()`: Allows you to optimize performance by controlling whether the component should re-render when props or state change. 
+`componentWillUnmount()`: Called before the component is unmounted (removed) from the DOM, used for cleaning up resources like subscriptions. 
+`static getDerivedStateFromProps(props, state)`: Called when the component receives new props, allowing you to update the state based on the new props before rendering. 
+`static getSnapshotBeforeUpdate(prevProps, prevState)`: Called right before the actual rendering occurs. It is used to make updates, such as scrolling. 
+`componentDidCatch(error, info)`: Allows you to catch errors within the component's descendants and render a fallback UI
 
 
 # React.memo(Component)
